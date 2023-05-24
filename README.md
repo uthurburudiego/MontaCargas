@@ -38,7 +38,7 @@ void apagar(int led)
 }
 ~~~
 
-  (Esta funcion se encarga de prender los led del Visualizador de 7 segmentos)
+  (Esta funcion se encarga de prender los led del Visualizador de 7 segmentos, mediante la configuración de sus pines. Se le pasa el estado requerido de cada pin en orden alfabetico)
 ~~~ C++ (lenguaje en el que esta escrito)
 void encender_display(int a, int b, int c, int d, int e, int f, int g)
 {
@@ -52,7 +52,7 @@ void encender_display(int a, int b, int c, int d, int e, int f, int g)
 }
 ~~~
 
- (Esta funcion muestra un número de piso en un display de 7 segmentos)
+ (Esta funcion muestra un número de piso en un display de 7 segmentos, recibe como parametro el numero de piso )
 ~~~ C++ (lenguaje en el que esta escrito)
 void mostrar_piso(int piso)
 {
@@ -92,7 +92,7 @@ void mostrar_piso(int piso)
 }
 ~~~
 
-(Esta funcion se de mostrar por el monitor el estado del montacargas y en que piso se encuentra )
+(Esta funcion se de mostrar por el monitor el estado del montacargas y en que piso se encuentra, recibe como parametro una cadena de texto y el numero de piso )
 
 ~~~ C++ (lenguaje en el que esta escrito)
 void mostrar_piso(const char* mensaje, int numero_piso)
@@ -107,7 +107,7 @@ void mostrar_piso(const char* mensaje, int numero_piso)
 ## :robot: Link del proyecto
 
 - Diego Uthurburu [ver proyecto](https://www.tinkercad.com/things/kN8JOVuuRoA-parcial-1b-diego-uthurburu/editel?sharecode=AUNr4Hfr5Z8YR_P0749QUUNWtZO-4m-I-0xm1Qz1a5M)
-- 
+
 ## Diagrama Esquematico:
 - [Ver Diagrama](Parcial/Img/esquema.pdf)
 ---
