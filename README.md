@@ -2,33 +2,29 @@
 ![Tinkercad](Parcial/Img/portada.jpg)
 
 
-## Integrantes 
+## Integrante
 - Diego Uthurburu
 
 
-## Proyecto: ASCENSOR.
+## Proyecto: MONTACARGAS.
 ![Tinkercad](Parcial/Img/trabajo.png)
 
 
 ## Descripción
-Permita al usuario saber a qué estación de subte está
-llegando, aparte el sistema muestra las estaciones que faltan hasta llegar a destino,
-para ello debemos utilizar 4 LEDs y el display de 7 segmentos. Esta vez el buzzer
-deberá emitir un sonido diferente cada vez que se llegue a una estación.
-El sistema deberá arrancar apagado, luego de presionar el botón empezará y hará lo
-pedido.
+Permita al usuario dar ordenes a un montacargas de subir, bajar o pausar
+desde diferentes pisos y muestre el estado actual del montacargas en el display 7.
 
 
 ## Funciónes principales
 Estas funciones se encargan de encender y apagar los leds.
 
- PULSADOR, CONSTITUCION, SAN_JUAN, INDEPENDENCIA, MORENO, A, B, C, D ,E, F, G,
- son #define que utilizamos para agregar los leds y Piezo o Buzzer , asociandolo a pines de la placa arduino.
+ UP, DOWN, STOP, LED_RED, LED_GREEN, A, B, C, D ,E, F, G,
+ son #define que utilizamos para agregar los leds y los pulsadores, asociandolo a pines de la placa arduino.
 
 (Esta funcion se encarga de prender los Led )
 
 ~~~ C++ (lenguaje en el que esta escrito)
-void prender(int led)
+void encender(int led)
 {
 	  digitalWrite(led, HIGH);
 }
@@ -44,30 +40,76 @@ void apagar(int led)
 
   (Esta funcion se encarga de prender los led del Visualizador de 7 segmentos)
 ~~~ C++ (lenguaje en el que esta escrito)
-void mostrar_numeros(int a, int b, int c, int d, int e, int f, int g)
+void encender_display(int a, int b, int c, int d, int e, int f, int g)
 {
-    digitalWrite(A,a);
-    digitalWrite(B,b);
-    digitalWrite(C,c);
-    digitalWrite(D,d);
-    digitalWrite(E,e);
-    digitalWrite(F,f);
-    digitalWrite(G,g);
-
+	digitalWrite(A, a);
+  	digitalWrite(B, b);
+  	digitalWrite(C, c);
+  	digitalWrite(D, d);
+  	digitalWrite(E, e);
+  	digitalWrite(F, f);
+  	digitalWrite(G, g);
 }
 ~~~
 
-## :robot: Link a los proyectos
+ (Esta funcion muestra un número de piso en un display de 7 segmentos)
+~~~ C++ (lenguaje en el que esta escrito)
+void mostrar_piso(int piso)
+{
+  switch(piso)
+  {
+ 	case 1:
+    	encender_display(LOW,HIGH,HIGH,LOW,LOW,LOW,LOW);
+    	break;
+    case 2:
+    	encender_display(HIGH,HIGH,LOW,HIGH,HIGH,LOW,HIGH);
+    	break;
+    case 3:
+    	encender_display(HIGH,HIGH,HIGH,HIGH,LOW,LOW,HIGH);
+    	break;
+    case 4:
+    	encender_display(LOW,HIGH,HIGH,LOW,LOW,HIGH,HIGH);
+    	break;
+    case 5:
+    	encender_display(HIGH,LOW,HIGH,HIGH,LOW,HIGH,HIGH);
+    	break;
+    case 6:
+    	encender_display(LOW,LOW,HIGH,HIGH,HIGH,HIGH,HIGH);
+    	break;
+    case 7:
+    	encender_display(HIGH,HIGH,HIGH,LOW,LOW,LOW,LOW);
+    	break;
+    case 8:
+    	encender_display(HIGH,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH);
+    	break;
+    case 9:
+    	encender_display(HIGH,HIGH,HIGH,LOW,LOW,HIGH,HIGH);
+    	break;
+    case 0:
+    	encender_display(HIGH,HIGH,HIGH,HIGH,HIGH,HIGH,LOW);
+    	break;
+  }
+}
+~~~
 
-- Matias Cuervo [ver proyecto](https://www.tinkercad.com/things/bAElv6KhMQH-super-jaiks-bojo/editel?sharecode=_bEp5xSMT9GE03Re8AFTyAgs6JiUbeiaR-w2N7AYkaI)
-- Lucas Da Silva Pinheerio [ver proyecto](https://www.tinkercad.com/things/hFFKjrnNKA3-powerful-densor-habbi/editel?sharecode=hSLlfDFcg9naeE9PNOc5Mizxp4aGDO9vrusrS3fZ20o)
-- Agustin Di Leone [ver proyecto](https://www.tinkercad.com/things/fROji6YbE7s-super-trug/editel?sharecode=7sJjtdV6HB2lzgoVJFzteLHUV6UUO2PUq_lvnrYaJLY)
-- Belén Funtanillas [ver proyecto](https://www.tinkercad.com/things/cbClac6TBhj-funtanillas-belen-dojo-2/editel?sharecode=mC3mi5-8cOSdtYWYRv6VCc67MJv2ODE3r7J-gGHUJvc)
-- Diego Uthurburu [ver proyecto](https://www.tinkercad.com/things/hX1LppnI35c-dojo-numero-dos/editel?sharecode=I-6krSOhWYcZn9OcA2VhyUUXisVNMirJE0aSpEEiqvc)
-- Adolfo Pumacayo [ver proyecto](https://www.tinkercad.com/things/iMaFKBlFCc5-stunning-densor/editel?sharecode=kxRxVRCvJHJQY_ZVGjSsjcSrPH5rgW8zqhATnLypyxo)
-## :tv: Link al video del proceso
-- [video](https://www.youtube.com/watch?v=VyGjE8kx-O0)
+(Esta funcion se de mostrar por el monitor el estado del montacargas y en que piso se encuentra )
 
+~~~ C++ (lenguaje en el que esta escrito)
+void mostrar_piso(const char* mensaje, int numero_piso)
+{
+  char texto[300]; 
+  sprintf(texto, "%s %d", mensaje, numero_piso);
+  Serial.println(texto);
+}
+~~~
+
+
+## :robot: Link del proyecto
+
+- Diego Uthurburu [ver proyecto](https://www.tinkercad.com/things/kN8JOVuuRoA-parcial-1b-diego-uthurburu/editel?sharecode=AUNr4Hfr5Z8YR_P0749QUUNWtZO-4m-I-0xm1Qz1a5M)
+- 
+## Diagrama Esquematico:
+- [Ver Diagrama](Parcial/Img/esquema.pdf)
 ---
 ### Fuentes
 - [Consejos para documentar](https://www.sohamkamani.com/how-to-write-good-documentation/#architecture-documentation).
